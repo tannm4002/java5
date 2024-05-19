@@ -98,21 +98,21 @@ public class MainController {
         return "trang-chu";
     }
     @GetMapping("/sinh-vien/loc")
-public String locSinhVien(@RequestParam Optional<String> tuNam, @RequestParam Optional<String> denNam, @RequestParam Optional<String> gioiTinh, @RequestParam Optional<String> chuyenNganh, Model model) {
+public String locSinhVien(@RequestParam String tuNam, @RequestParam String denNam, @RequestParam String gioiTinh, @RequestParam String chuyenNganh, Model model) {
     List<SinhVien> dsSinhVien = DS_SINH_VIEN;
-    if (tuNam.isPresent() && !tuNam.get().isEmpty()) {
-        Date tuNamDate = convertStringToDate(tuNam.get());
+    if (!tuNam.isEmpty()) {
+        Date tuNamDate = convertStringToDate(tuNam);
         dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getNgaySinh().after(tuNamDate)).collect(Collectors.toList());
     }
-    if (denNam.isPresent() && !denNam.get().isEmpty()) {
-        Date denNamDate = convertStringToDate(denNam.get());
+    if (!denNam.isEmpty()) {
+        Date denNamDate = convertStringToDate(denNam);
         dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getNgaySinh().before(denNamDate)).collect(Collectors.toList());
     }
-    if (gioiTinh.isPresent() && !gioiTinh.get().equals("none")) {
-        dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getGioiTinh() == Boolean.parseBoolean(gioiTinh.get())).collect(Collectors.toList());
+    if (!gioiTinh.isEmpty()) {
+        dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getGioiTinh() == Boolean.parseBoolean(gioiTinh)).collect(Collectors.toList());
     }
-    if (chuyenNganh.isPresent() && !chuyenNganh.get().equals("none")) {
-        dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getChuyenNganh().equals(chuyenNganh.get())).collect(Collectors.toList());
+    if (!chuyenNganh.isEmpty()) {
+        dsSinhVien = dsSinhVien.stream().filter(sv -> sv.getChuyenNganh().equals(chuyenNganh)).collect(Collectors.toList());
     }
     model.addAttribute("dsSinhVien", dsSinhVien);
     return "trang-chu";

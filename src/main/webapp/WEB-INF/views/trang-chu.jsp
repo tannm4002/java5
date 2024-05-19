@@ -80,13 +80,13 @@
     <%--    Lọc theo giới tính--%>
     <div class="mb-2">
         <select name="gioiTinh" class="form-select me-2">
-            <option value="none" selected>Chọn giới tính</option>
+            <option value="">Chọn giới tính</option>
             <option value="true" ${param.gioiTinh == 'true' ? 'selected' : ''}>Nam</option>
             <option value="false" ${param.gioiTinh == 'false' ? 'selected' : ''}>Nữ</option>
         </select>
     </div>
     <select name="chuyenNganh" class="form-select">
-        <option value="none" selected>Chọn chuyên ngành</option>
+        <option value="">Chọn chuyên ngành</option>
         <option value="Công nghệ thông tin" ${param.chuyenNganh == 'Công nghệ thông tin' ? 'selected' : ''}>Công nghệ thông tin</option>
         <option value="Marketing" ${param.chuyenNganh == 'Marketing' ? 'selected' : ''}>Marketing</option>
         <option value="Tự động hóa" ${param.chuyenNganh == 'Tự động hóa' ? 'selected' : ''}>Tự động hóa</option>
