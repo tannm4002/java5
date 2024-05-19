@@ -24,6 +24,7 @@
         <div class="mb-3">
             <label for="maSinhVien" class="form-label">Mã Sinh Viên</label>
             <input type="text" class="form-control" id="maSinhVien" name="maSinhVien" required>
+            <p class="text-danger" id="maSinhVienError" hidden>Mã sinh viên đã tồn tại</p>
         </div>
         <div class="mb-3">
             <label for="tenSinhVien" class="form-label">Tên Sinh Viên</label>
@@ -161,6 +162,21 @@
             confirmDelete.href = e.target.href;
             deleteModal.show();
         });
+    });
+    let btnThem = document.getElementById('btnThem');
+    btnThem.addEventListener('click', (e) => {
+        let maSinhVien = document.getElementById('maSinhVien').value;
+        let maSinhVienError = document.getElementById('maSinhVienError');
+        let arrMaSinhVien = document.querySelectorAll('.maSinhVien');
+        for (const ma of arrMaSinhVien) {
+            if (maSinhVien === ma.textContent) {
+                e.preventDefault();
+                maSinhVienError.hidden = false;
+                break;
+            } else {
+                maSinhVienError.hidden = true;
+            }
+        }
     });
 </script>
 </html>
