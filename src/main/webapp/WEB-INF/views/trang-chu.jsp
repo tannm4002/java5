@@ -163,20 +163,17 @@
             deleteModal.show();
         });
     });
-    let btnThem = document.getElementById('btnThem');
-    btnThem.addEventListener('click', (e) => {
-        let maSinhVien = document.getElementById('maSinhVien').value;
-        let maSinhVienError = document.getElementById('maSinhVienError');
-        let arrMaSinhVien = document.querySelectorAll('.maSinhVien');
-        for (const ma of arrMaSinhVien) {
-            if (maSinhVien === ma.textContent) {
-                e.preventDefault();
-                maSinhVienError.hidden = false;
-                break;
-            } else {
-                maSinhVienError.hidden = true;
-            }
-        }
-    });
+    document.getElementById('btnThem').addEventListener('click', (e) => {
+    let maSinhVien = document.getElementById('maSinhVien').value;
+    let exists = Array.from(document.querySelectorAll('.maSinhVien')).some(ma => ma.textContent === maSinhVien);
+    console.log(exists);
+    if (exists) {
+        e.preventDefault();
+        document.getElementById('maSinhVien').setCustomValidity('Mã sinh viên đã tồn tại');
+        document.getElementById('maSinhVien').reportValidity();
+    } else {
+        document.getElementById('maSinhVien').setCustomValidity('');
+    }
+});
 </script>
 </html>
